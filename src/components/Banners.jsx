@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBanners } from "../store/slices/banners";
+import Waves from "./Waves";
 
 const Banners = () => {
   const { banners = [], loading, error } = useSelector((state) => state.banners);
@@ -67,10 +68,12 @@ const Banners = () => {
                   className="h-[150px] sm:h-[180px] md:h-[250px] lg:h-[350px] xl:h-[400px] w-full object-cover"/>
                   
                   </div>
+                  
                 ))}
-              
+               
             </div>
           ))}
+         
         </div>
 
         

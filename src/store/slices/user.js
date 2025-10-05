@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 
 
 export const forgetPassword = createAsyncThunk(
-  "user/forgetPassword",
+  "User/forgetPassword",
   async ({ email }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
@@ -27,25 +27,33 @@ export const forgetPassword = createAsyncThunk(
     }
   }
 );
+
 export const signUp = createAsyncThunk(
   "user/signup",
-  async ({ user, navigate }) => {
+  async ({ userData, navigate }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
-        "https://tn360-122923924979.europe-west1.run.app/api/v1/auth/register",
-        user
+        "https://tn360-back-office-122923924979.europe-west1.run.app/api/v1/auth/register",
+        userData // pas besoin de le mettre dans {user}, juste l’objet direct
       );
-      navigate("/login");
+
       toast.success("Account created Successfully");
+      navigate("/login");
+
       return data;
     } catch (error) {
-      toast.error(error.response.data.message);
+      const errorMessage =
+        error.response?.data?.message || "Registration failed";
+      toast.error(errorMessage);
+      return rejectWithValue(errorMessage);
     }
   }
 );
 
+
+
 export const fetchUserProfile = createAsyncThunk(
-  "user/fetchUserProfile",
+  "User/fetchUserProfile",
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("token"); // Assuming token is stored in localStorage
@@ -66,7 +74,7 @@ export const fetchUserProfile = createAsyncThunk(
 
 // Update user profile
 export const updateUserProfile = createAsyncThunk(
-  "user/updateUserProfile",
+  "User/updateUserProfile",
   async (profileData, { getState, rejectWithValue }) => {
     try {
       // Retrieve token from state or localStorage
@@ -98,7 +106,7 @@ export const updateUserProfile = createAsyncThunk(
   }
 );
 export const updateCagnotteInDB = createAsyncThunk(
-  "user/updateCagnotteInDB",
+  "U/updateCagnotteInDB",
   async (updatedBalance, { getState, rejectWithValue }) => {
     try {
       const state = getState();
@@ -131,7 +139,7 @@ export const updateCagnotteInDB = createAsyncThunk(
 );
 
 const UserSlice = createSlice({
-  name: "user",
+  name: "User",
   initialState: {
     Userprofile: null,
     loggedInUser: null, // Initially no user logged in

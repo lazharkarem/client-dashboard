@@ -18,11 +18,11 @@ export const fetchOffre = createAsyncThunk(
   }
 );
 export const fetchOffreById = createAsyncThunk(
-  "offre/etchOffreById",
+  "offre/fetchOffreById",
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "https://tn360-122923924979.europe-west1.run.app/api/v1/offre/",id
+        `https://tn360-122923924979.europe-west1.run.app/api/v1/offre/${id}`
       );
       return response.data;
     } catch (err) {

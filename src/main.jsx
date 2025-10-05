@@ -24,7 +24,7 @@ import Profile from "./pages/Profile";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import Orders from "./pages/Commandes";
 import SearchResult from "./components/SearchResult";
-
+import "./i18n";
 
 
 const router = createBrowserRouter(

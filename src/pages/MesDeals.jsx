@@ -18,7 +18,9 @@ const MesDeals = () => {
   const { Userprofile } = useSelector((state) => state.user);
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const i = 0;
 
+console.log(i)
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const MesDeals = () => {
   }, [dispatch, Userprofile]);
 
   const deal = offre.data || [];
-
+console.log(deal.length)
   // Keep only one deal per type_offre
   const seenTypes = new Set();
   const uniqueDeals = deal.filter((el) => {
@@ -114,20 +116,23 @@ const MesDeals = () => {
       </div>
 
       {auth.isLoggedIn && (
-        uniqueDeals.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-2 bg-white w-full sm:h-20 md:h-full">
-            {uniqueDeals.map((el) => {
+        deal.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-2 bg-white  ">
+            {deal.map((el) => {
               const timeLeft = calculateTimeLeft(el.date_fin);
-              if (el.type_offre === "deal_depense") {
-                return <Depense key={el.id} Time={timeLeft} />;
-              } else if (el.type_offre === "deal_frequence") {
-                return <DealFrequence key={el.id} Time={timeLeft} />;
-              } else if (el.type_offre === "deal_anniversaire") {
-                return <DealAnniversaire key={el.id} Time={timeLeft} />;
-              } else if (el.type_offre === "deal_marque") {
-                return <DealMarque key={el.id} Time={timeLeft} />;
+              if (el.type_offre == "deal_depense") {
+                return <Depense key={el.id} data={el.ID_deal_offre} Time={timeLeft} />;
+              } else if (el.type_offre == "deal_frequence") {
+                return <DealFrequence key={el.id} data={el.ID_deal_offre} Time={timeLeft} />;
+              } else if (el.type_offre == "deal_anniversaire") {
+                return <DealAnniversaire key={el.id} data={el.ID_deal_offre} Time={timeLeft} />;
+              } else if (el.type_offre == "deal_marque") {
+                return <DealMarque key={el.id} Time={timeLeft } data ={el.ID_deal_offre} />;
               }
-              return null;
+              else{
+                return null;
+              }
+             
             })}
           </div>
         ) : (

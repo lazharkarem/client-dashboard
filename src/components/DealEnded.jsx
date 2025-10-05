@@ -22,7 +22,7 @@ const DealEnded = ({ gain, image }) => {
       setClicked(true); // Marquer comme cliqué pour ne pas le refaire
     }
   }, []);
-
+  console.log(show)
   // Fonction qui gère l'envoi à la cagnotte lors du clic
   const toCagnotte = () => {
     if (clicked) return; // Si l'utilisateur a déjà cliqué, ne rien faire
@@ -49,17 +49,17 @@ const DealEnded = ({ gain, image }) => {
 
   return (
     <div
-      className="flex justify-start m-8 items-center bg-gray-100 cursor-pointer"
+      className="flex flex-col justify-between bg-gray-50 shadow-md rounded-lg"
       onClick={toCagnotte}
     >
       {show && !clicked && ( // Afficher le message seulement si ce n'est pas cliqué
-        <div className="w-full rounded-lg overflow-hidden shadow-lg bg-green-950">
-          <div className="flex flex-row justify-evenly">
+        <div className="flex flex-row justify-start m-2 items-center bg-gray-100">
+          <div className="w-full h-80 rounded-lg overflow-hidden shadow-lg bg-white flex flex-col">
             {/* Image Section */}
             <img
               src={image}
               alt="Deal"
-              className="w-48 h-48 object-cover p-2"
+              className="w-32 h-24 object-cover p-1"
             />
 
             {/* Text Section */}
